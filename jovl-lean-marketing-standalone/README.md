@@ -1,12 +1,25 @@
-# Jovl Lean Marketing - standalone website
+# Jovl Lean Marketing - future light versie
 
-Dit is een statische versie zonder Webflow-hosting, Webflow CSS of Webflow JavaScript.
+Deze versie bouwt voort op v4 light en houdt de oorspronkelijke Jovl-basis vast:
+- Licht hoofdmenu
+- Lichte hero
+- Lichte footer
+- Eén donker inhoudelijk accentblok
+- Originele favicon en logo behouden
+- Kleuren: #1B1026, #03E9AE, #3AD1EE
+- Inter als lettertype
+- Inhoud gebaseerd op de goedgekeurde versie
+- Scorecard verwijderd
+- Adres: Kruittorenstraat 6, 7126 BH Bredevoort
 
-Gebruik:
-1. Open `index.html` lokaal in je browser.
-2. Upload de map naar hosting zoals Cloudflare Pages, Netlify, Vercel, TransIP, Antagonist of je eigen server.
-3. Koppel het formulier nog aan een formulierdienst, CRM of mailtool.
+Extra toegevoegd:
+- Meer intuïtieve hero met zwevende systeemkaarten
+- Subtiele cursor glow op desktop
+- Scroll reveal animaties
+- Interactieve kaarten
+- Flow-blok waarin duidelijk wordt: minder ruis, meer richting
+- Meer premium gevoel zonder druk of verkoopachtig te worden
 
 Let op:
-- De afbeeldingen verwijzen nu nog naar de bestaande Webflow CDN-bestanden.
-- Wil je volledig onafhankelijk van Webflow zijn, download dan de gebruikte afbeeldingen en vervang de `src`-links door lokale bestanden in een `/assets`-map.
+- Beelden en logo's worden nog vanaf Webflow CDN geladen.
+- Voor volledig zelfstandig hosten: assets later lokaal opslaan in /assets.
