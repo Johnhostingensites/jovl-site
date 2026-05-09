@@ -9,8 +9,9 @@
   <meta property="og:description" content="Marketing als logisch bedrijfsproces. Signaleer verspilling en boek progressie." />
   <meta property="og:type" content="website" />
 
-  <link rel="shortcut icon" type="image/x-icon" href="https://cdn.prod.website-files.com/6279de046398e015d0efe302/627a0329b52679798097e0e8_favicon%20Jovl%202.png">
-  <link rel="apple-touch-icon" href="https://cdn.prod.website-files.com/6279de046398e015d0efe302/627a030c1591456c700988f5_favicon%20Jovl.png">
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap');
@@ -96,6 +97,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 28px;
+      position: relative;
     }
 
     .brand {
@@ -120,6 +122,42 @@
 
     .brand-title .jovl { color: var(--mint); }
     .brand-title .marketing { color: var(--cyan); }
+
+    .nav-toggle { display: none; }
+
+    .menu-button {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      background: white;
+      cursor: pointer;
+      place-items: center;
+      padding: 0;
+    }
+
+    .menu-icon {
+      width: 20px;
+      height: 14px;
+      position: relative;
+      display: block;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after,
+    .menu-icon span {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--dark);
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .menu-icon::before { top: 0; }
+    .menu-icon span { top: 6px; }
+    .menu-icon::after { bottom: 0; }
 
     .nav-actions {
       display: flex;
@@ -307,10 +345,10 @@
     }
 
     .system-card.three {
-      width: 170px;
-      right: 58px;
-      top: 28px;
-      z-index: 2;
+      width: 172px;
+      right: 18px;
+      top: 16px;
+      z-index: 6;
       background: var(--dark);
       color: white;
       animation: floatC 7s ease-in-out infinite alternate;
@@ -832,8 +870,58 @@
       .strip-item:nth-child(2) { border-right: 0; }
       .strip-item:nth-child(1),
       .strip-item:nth-child(2) { border-bottom: 1px solid var(--line); }
-      .nav-inner { align-items: flex-start; flex-direction: column; padding: 18px 0; }
-      .nav-actions { justify-content: flex-start; }
+      .nav-inner {
+        min-height: 82px;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .nav-actions {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(100% + 1px);
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px;
+        background: rgba(251,249,244,.98);
+        border: 1px solid var(--line);
+        box-shadow: var(--soft-shadow);
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s ease, transform .2s ease;
+      }
+
+      .nav-actions a {
+        padding: 14px 12px;
+      }
+
+      .nav-actions .button {
+        margin-top: 8px;
+      }
+
+      .nav-toggle:checked ~ .menu-button .menu-icon::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .nav-toggle:checked ~ .menu-button .menu-icon span {
+        opacity: 0;
+      }
+
+      .nav-toggle:checked ~ .menu-button .menu-icon::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .nav-toggle:checked ~ .nav-actions {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
       .flow-row { grid-template-columns: 1fr; }
     }
 
@@ -846,7 +934,14 @@
       .hero-visual { min-height: 430px; }
       .system-card.one { left: 0; top: 22px; }
       .system-card.two { right: 0; bottom: 12px; }
-      .system-card.three { display: none; }
+      .system-card.three {
+        display: block;
+        right: 12px;
+        top: 2px;
+        width: 128px;
+        padding: 15px;
+      }
+      .system-card.three span { display: none; }
       section { padding: 58px 0; }
       .logos { grid-template-columns: 1fr; }
       .strip-grid { grid-template-columns: 1fr; }
@@ -854,6 +949,320 @@
       .strip-item:last-child { border-bottom: 0; }
       .cursor-glow { display: none; }
     }
+  
+    /* Premium upgrade: meaningful visuals, icon system, motion system */
+    .word-mark {
+      position: relative;
+      display: inline-block;
+    }
+
+    .word-mark::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      bottom: .08em;
+      height: .16em;
+      background: linear-gradient(90deg, rgba(3,233,174,.55), rgba(58,209,238,.45));
+      z-index: -1;
+    }
+
+    .micro-copy {
+      margin-top: 18px;
+      max-width: 620px;
+      color: var(--muted-2);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .visual-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(27,16,38,.18), transparent);
+      margin: 0 auto;
+      width: min(var(--max), calc(100% - 40px));
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .icon-note {
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      padding: 22px;
+      min-height: 168px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .icon-note:hover {
+      transform: translateY(-4px);
+      border-color: rgba(58,209,238,.44);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .line-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 18px;
+    }
+
+    .line-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--dark);
+      stroke-width: 1.75;
+      fill: none;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+
+    .icon-note:nth-child(2) .line-icon svg { stroke: var(--cyan); }
+    .icon-note:nth-child(3) .line-icon svg { stroke: var(--mint); }
+
+    .icon-note strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+      letter-spacing: -.03em;
+      color: var(--dark);
+    }
+
+    .icon-note span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .system-section {
+      background:
+        radial-gradient(circle at 86% 14%, rgba(58,209,238,.12), transparent 32%),
+        radial-gradient(circle at 10% 90%, rgba(3,233,174,.10), transparent 34%),
+        linear-gradient(135deg, var(--cream), var(--pale));
+    }
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .system-diagram {
+      position: relative;
+      min-height: 520px;
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .system-diagram::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(27,16,38,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,16,38,.045) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), transparent 88%);
+    }
+
+    .diagram-node {
+      position: absolute;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      padding: 16px;
+      min-width: 150px;
+      box-shadow: 0 14px 36px rgba(27,16,38,.08);
+    }
+
+    .diagram-node strong {
+      display: block;
+      color: var(--dark);
+      font-size: 18px;
+      letter-spacing: -.04em;
+      line-height: 1.05;
+    }
+
+    .diagram-node span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .diagram-node.a { left: 36px; top: 48px; }
+    .diagram-node.b { right: 42px; top: 88px; }
+    .diagram-node.c { left: 70px; bottom: 74px; }
+    .diagram-node.d { right: 58px; bottom: 52px; background: var(--dark); }
+    .diagram-node.d strong,
+    .diagram-node.d span { color: white; }
+
+    .diagram-core {
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(3,233,174,.16), rgba(58,209,238,.18));
+      border: 1px solid rgba(27,16,38,.12);
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -.07em;
+      color: var(--dark);
+      animation: pulseCore 4s ease-in-out infinite;
+    }
+
+    .diagram-line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(27,16,38,.10), var(--cyan));
+      transform-origin: left center;
+    }
+
+    .diagram-line.l1 { transform: rotate(-142deg); }
+    .diagram-line.l2 { transform: rotate(-34deg); }
+    .diagram-line.l3 { transform: rotate(142deg); }
+    .diagram-line.l4 { transform: rotate(34deg); background: linear-gradient(90deg, rgba(27,16,38,.10), var(--mint)); }
+
+    @keyframes pulseCore {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(3,233,174,.16); }
+      50% { box-shadow: 0 0 0 20px rgba(3,233,174,0); }
+    }
+
+    .noise-to-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 36px;
+    }
+
+    .mini-panel {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 24px;
+      min-height: 220px;
+    }
+
+    .mini-panel h3 {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .noise-list,
+    .flow-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .noise-list span,
+    .flow-list span {
+      display: block;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .noise-list span {
+      color: var(--muted);
+      background: rgba(27,16,38,.025);
+    }
+
+    .flow-list span {
+      color: var(--dark);
+      background: linear-gradient(90deg, rgba(3,233,174,.10), rgba(58,209,238,.08));
+      border-color: rgba(58,209,238,.28);
+    }
+
+    .arrow-panel {
+      display: grid;
+      place-items: center;
+      min-width: 70px;
+      color: var(--dark);
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .section-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .section-index::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--mint), var(--cyan));
+    }
+
+    @media (max-width: 960px) {
+      .icon-grid,
+      .system-grid,
+      .noise-to-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow-panel {
+        min-height: 48px;
+        transform: rotate(90deg);
+      }
+
+      .system-diagram {
+        min-height: 460px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .icon-grid {
+        gap: 12px;
+      }
+
+      .system-diagram {
+        min-height: 520px;
+      }
+
+      .diagram-node {
+        min-width: 130px;
+        padding: 13px;
+      }
+
+      .diagram-node.a { left: 16px; top: 24px; }
+      .diagram-node.b { right: 16px; top: 104px; }
+      .diagram-node.c { left: 16px; bottom: 116px; }
+      .diagram-node.d { right: 16px; bottom: 24px; }
+
+      .diagram-core {
+        width: 150px;
+        height: 150px;
+        font-size: 28px;
+      }
+    }
+
   </style>
 </head>
 
@@ -863,9 +1272,14 @@
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#">
-        <img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279de6a30ddfc0746ff610c_icon%202.png" alt="Jovl logo">
+        <img src="./assets/logo-jovl.png" alt="Jovl logo">
         <span class="brand-title"><span class="jovl">Jovl</span><br>Lean<br><span class="marketing">Marketing</span></span>
       </a>
+
+      <input class="nav-toggle" id="nav-toggle" type="checkbox" aria-label="Menu openen">
+      <label class="menu-button" for="nav-toggle" aria-label="Menu openen">
+        <span class="menu-icon"><span></span></span>
+      </label>
 
       <div class="nav-actions">
         <a href="#aanbod" class="text-link">Aanbod</a>
@@ -880,7 +1294,7 @@
     <div class="container hero-grid">
       <div class="reveal">
         <p class="eyebrow">Lean Marketing</p>
-        <h1>Marketing als logisch bedrijfsproces.</h1>
+        <h1>Marketing als <span class="word-mark">logisch</span> bedrijfsproces.</h1>
         <p class="hero-subtitle">Signaleer verspilling en boek progressie.</p>
         <p class="lead">
           Marketing voelt vaak als iets tijdrovends en onsamenhangends. Losse acties, veel gedoe, weinig grip.
@@ -895,6 +1309,7 @@
           <a href="https://calendly.com/jovl-lean-marketing/persoonlijk-gesprek" target="_blank" rel="noopener" class="button">Plan een kennismaking</a>
           <a href="#werkwijze" class="button secondary">Bekijk de werkwijze</a>
         </div>
+        <div class="micro-copy">Voor maakbedrijven die marketing serieus nemen, maar niet willen verdwalen in losse acties.</div>
       </div>
 
       <div class="hero-visual reveal">
@@ -908,7 +1323,7 @@
           <span>waarde voorop</span>
         </div>
         <div class="system-card core">
-          <img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279ef6c2693dcaece6ee4ab_Business%20Plan%20(2).gif" alt="Business plan animatie">
+          <img src="./assets/hero-animatie.gif" alt="Business plan animatie">
         </div>
         <div class="system-card two">
           <strong>beter</strong>
@@ -937,6 +1352,53 @@
     </div>
   </section>
 
+
+  <div class="visual-divider"></div>
+
+  <section>
+    <div class="container">
+      <div class="section-index reveal">Wat Jovl strak trekt</div>
+      <div class="icon-grid reveal">
+        <div class="icon-note">
+          <div>
+            <div class="line-icon">
+              <svg viewBox="0 0 48 48"><path d="M8 36h32M12 30V14h24v16M18 30V20h12v10"/></svg>
+            </div>
+            <strong>Richting</strong>
+            <span>Een helder doel waardoor keuzes makkelijker worden.</span>
+          </div>
+        </div>
+        <div class="icon-note">
+          <div>
+            <div class="line-icon">
+              <svg viewBox="0 0 48 48"><path d="M10 12h28M10 24h20M10 36h12M36 22l4 4-4 4"/></svg>
+            </div>
+            <strong>Flow</strong>
+            <span>Minder overdracht, minder ruis, meer voortgang.</span>
+          </div>
+        </div>
+        <div class="icon-note">
+          <div>
+            <div class="line-icon">
+              <svg viewBox="0 0 48 48"><path d="M24 8v32M8 24h32M14 14l20 20M34 14L14 34"/></svg>
+            </div>
+            <strong>Focus</strong>
+            <span>Niet alles doen, maar het juiste scherp kiezen.</span>
+          </div>
+        </div>
+        <div class="icon-note">
+          <div>
+            <div class="line-icon">
+              <svg viewBox="0 0 48 48"><path d="M10 34l9-9 7 7 12-18M10 40h28"/></svg>
+            </div>
+            <strong>Progressie</strong>
+            <span>Stap voor stap sterker, zonder onnodige complexiteit.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="signal-strip">
     <div class="container strip-grid reveal">
       <div class="strip-item"><strong>01</strong><span>Doel scherp maken</span></div>
@@ -957,14 +1419,14 @@
       </div>
 
       <div class="logos reveal">
-        <a class="logo-card" href="https://www.szvk.nl/Consumenten" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/627a020b7e2778b992560e99_SZVK__ScaleMaxWidthWzQwMF0.png" alt="SZVK"></a>
-        <a class="logo-card" href="https://nedapflux.com/nl/" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279f6f169246c1d7cb34db1_download%20(4).png" alt="Nedap Flux"></a>
-        <a class="logo-card" href="https://www.sterktechniekonderwijs.nl/regio/achterhoek" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279f96f387e0471460a2e1f_sto_logo_met_tekst_klein.png" alt="Sterk Techniek Onderwijs"></a>
-        <a class="logo-card" href="https://www.zorgzaam.nl/" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279f9322693dc16586f2301_zorgzaam-logo.png" alt="Zorgzaam"></a>
-        <a class="logo-card" href="https://www.tech-tok.nl/" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/628b857a2e96457656bd228e_Mr%20en%20Ms%20T.png" alt="Tech-Tok"></a>
-        <a class="logo-card" href="https://www.rondevanbredevoort.nl/" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/627a01f8b5267998a397de6d_logo_ronde_van_bredevoort_RGB_high_contrast-e1490114851700.jpeg" alt="Ronde van Bredevoort"></a>
-        <a class="logo-card" href="https://kaak.com/royal-kaak/" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/63cd6bd53f5ddf388093cc63_logo%20Royal%20Kaak.png" alt="Royal Kaak"></a>
-        <a class="logo-card" href="https://www.open-dag-metzo.nl/" target="_blank" rel="noopener"><img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/627b493e48f9ac4ac5e75d58_logo.png" alt="Metzo College"></a>
+        <a class="logo-card" href="https://www.szvk.nl/Consumenten" target="_blank" rel="noopener"><img src="./assets/logo-szvk.png" alt="SZVK"></a>
+        <a class="logo-card" href="https://nedapflux.com/nl/" target="_blank" rel="noopener"><img src="./assets/logo-nedap.png" alt="Nedap Flux"></a>
+        <a class="logo-card" href="https://www.sterktechniekonderwijs.nl/regio/achterhoek" target="_blank" rel="noopener"><img src="./assets/logo-sto.png" alt="Sterk Techniek Onderwijs"></a>
+        <a class="logo-card" href="https://www.zorgzaam.nl/" target="_blank" rel="noopener"><img src="./assets/logo-zorgzaam.png" alt="Zorgzaam"></a>
+        <a class="logo-card" href="https://www.tech-tok.nl/" target="_blank" rel="noopener"><img src="./assets/tech-tok.png" alt="Tech-Tok"></a>
+        <a class="logo-card" href="https://www.rondevanbredevoort.nl/" target="_blank" rel="noopener"><img src="./assets/logo-ronde-van-bredevoort.jpeg" alt="Ronde van Bredevoort"></a>
+        <a class="logo-card" href="https://kaak.com/royal-kaak/" target="_blank" rel="noopener"><img src="./assets/logo-royal-kaak.png" alt="Royal Kaak"></a>
+        <a class="logo-card" href="https://www.open-dag-metzo.nl/" target="_blank" rel="noopener"><img src="./assets/logo-metzo.png" alt="Metzo College"></a>
       </div>
     </div>
   </section>
@@ -982,7 +1444,7 @@
       <div class="cards reveal">
         <article class="card">
           <div>
-            <img class="card-icon" src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279de046398e01038efe326_c02.svg" alt="">
+            <img class="card-icon" src="./assets/icon-goede-start.svg" alt="">
             <h3>Een goede start</h3>
             <p>Je wilt starten met een marketingproject of traject en weet niet goed waar te beginnen of wie je moet betrekken.</p>
             <div class="more">Denk aan een nieuwe website, campagne, marktpositionering, contentaanpak of het opzetten van een marketingstructuur. Eerst richting, daarna pas middelen.</div>
@@ -992,7 +1454,7 @@
 
         <article class="card">
           <div>
-            <img class="card-icon" src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279de046398e00809efe329_c03.svg" alt="">
+            <img class="card-icon" src="./assets/icon-tijdelijke-vervanging.svg" alt="">
             <h3>Tijdelijke vervanging</h3>
             <p>Een collega vertrekt, is met verlof of valt uit. Vaak ontstaat dan een periode waarin marketing stilvalt.</p>
             <div class="more">Jovl brengt rust, overzicht en voortgang. Niet door alles over te nemen, maar door structuur te houden en de juiste mensen te laten doen waar ze goed in zijn.</div>
@@ -1002,13 +1464,60 @@
 
         <article class="card">
           <div>
-            <img class="card-icon" src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279de046398e06d89efe32a_c01.svg" alt="">
+            <img class="card-icon" src="./assets/icon-sturing.svg" alt="">
             <h3>Sturing</h3>
             <p>Er zijn kansen genoeg, maar kiezen is lastig. Daardoor ontstaat veel beweging, zonder duidelijke progressie.</p>
             <div class="more">Ik kijk van buiten naar binnen. Wat draagt bij aan het doel? Wat is vooral drukte? En waar zit de hoogste hefboom voor de komende periode?</div>
           </div>
           <button class="toggle" type="button">Lees meer</button>
         </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="system-section">
+    <div class="container system-grid">
+      <div class="reveal">
+        <p class="eyebrow">Van ruis naar richting</p>
+        <h2>Het probleem is zelden dat er te weinig gebeurt.</h2>
+        <p class="lead">
+          Vaak gebeurt er juist veel. Alleen niet altijd in dezelfde richting. Jovl maakt zichtbaar waar energie weglekt en waar marketing weer logisch moet worden.
+        </p>
+
+        <div class="noise-to-flow">
+          <div class="mini-panel">
+            <h3>Ruis</h3>
+            <div class="noise-list">
+              <span>Losse acties</span>
+              <span>Veel afstemming</span>
+              <span>Onduidelijke eigenaarschap</span>
+              <span>Geen leercyclus</span>
+            </div>
+          </div>
+          <div class="arrow-panel">→</div>
+          <div class="mini-panel">
+            <h3>Richting</h3>
+            <div class="flow-list">
+              <span>Scherp doel</span>
+              <span>Heldere rollen</span>
+              <span>Vaste cadans</span>
+              <span>Bijsturen op waarde</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="system-diagram reveal" aria-hidden="true">
+        <div class="diagram-line l1"></div>
+        <div class="diagram-line l2"></div>
+        <div class="diagram-line l3"></div>
+        <div class="diagram-line l4"></div>
+        <div class="diagram-node a"><strong>Doel</strong><span>waarom doen we dit?</span></div>
+        <div class="diagram-node b"><strong>Waarde</strong><span>voor wie is dit zinvol?</span></div>
+        <div class="diagram-core">Jovl</div>
+        <div class="diagram-node c"><strong>Proces</strong><span>hoe blijft dit lopen?</span></div>
+        <div class="diagram-node d"><strong>Progressie</strong><span>wat leren we?</span></div>
       </div>
     </div>
   </section>
@@ -1093,7 +1602,7 @@
         </div>
       </div>
       <div class="portrait">
-        <img src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/628779ca7182738223f8ad1f_John.jpeg" alt="John van Lochem">
+        <img src="./assets/john-van-lochem.jpeg" alt="John van Lochem">
       </div>
     </div>
   </section>
@@ -1101,7 +1610,7 @@
   <footer>
     <div class="container footer-grid">
       <div>
-        <img class="footer-logo" src="https://cdn.prod.website-files.com/6279de046398e015d0efe302/6279de6a30ddfc0746ff610c_icon%202.png" alt="Jovl logo">
+        <img class="footer-logo" src="./assets/logo-jovl.png" alt="Jovl logo">
       </div>
       <div class="footer-contact">
         <div class="footer-title">Jovl</div>
@@ -1147,6 +1656,13 @@
         glow.style.opacity = "0";
       });
     }
+
+    document.querySelectorAll(".nav-actions a").forEach(link => {
+      link.addEventListener("click", () => {
+        const toggle = document.getElementById("nav-toggle");
+        if (toggle) toggle.checked = false;
+      });
+    });
   </script>
 </body>
 </html>

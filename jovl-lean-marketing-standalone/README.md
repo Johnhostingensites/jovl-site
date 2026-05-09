@@ -1,25 +1,23 @@
-# Jovl Lean Marketing - future light versie
+# Jovl Lean Marketing - complete deploy versie
 
-Deze versie bouwt voort op v4 light en houdt de oorspronkelijke Jovl-basis vast:
-- Licht hoofdmenu
-- Lichte hero
-- Lichte footer
-- Eén donker inhoudelijk accentblok
-- Originele favicon en logo behouden
-- Kleuren: #1B1026, #03E9AE, #3AD1EE
-- Inter als lettertype
-- Inhoud gebaseerd op de goedgekeurde versie
-- Scorecard verwijderd
-- Adres: Kruittorenstraat 6, 7126 BH Bredevoort
+Deze versie bevat:
+- `index.html`
+- lokale `/assets` map
+- lokale favicon
+- lokaal Jovl-logo
+- lokale partnerlogo’s
+- lokale iconen
+- lokale foto van John
+- lokale hero-animatie
 
-Extra toegevoegd:
-- Meer intuïtieve hero met zwevende systeemkaarten
-- Subtiele cursor glow op desktop
-- Scroll reveal animaties
-- Interactieve kaarten
-- Flow-blok waarin duidelijk wordt: minder ruis, meer richting
-- Meer premium gevoel zonder druk of verkoopachtig te worden
+De site verwijst voor afbeeldingen niet meer naar Webflow-CDN.
 
-Let op:
-- Beelden en logo's worden nog vanaf Webflow CDN geladen.
-- Voor volledig zelfstandig hosten: assets later lokaal opslaan in /assets.
+## Lokaal testen
+Dubbelklik op `index.html`.
+
+## Uploaden
+Upload de volledige map naar Netlify, Cloudflare Pages of een andere statische hosting.
+Belangrijk: upload niet alleen `index.html`, maar ook de map `/assets`.
+
+## Let op
+Het lettertype Inter wordt nog via Google Fonts geladen. Wil je later ook dat volledig lokaal maken, dan kan dat nog in een volgende optimalisatieronde.
