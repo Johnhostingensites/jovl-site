@@ -34,3 +34,8 @@ Na activatie ontvang je iedere inzending als tabeloverzicht. Via het e-mailadres
 ## Publiceren
 
 Plaats de inhoud van deze map in de root van de GitHub-repository. Laat de mappenstructuur intact: `/assets/`, `/website/` en `/bedankt/` zijn nodig.
+
+
+## Versie 6
+- Het blok “Praktisch toegepast” is één-op-één teruggebracht naar de oorspronkelijke kop, tekst, 4×2-logo-indeling en hoverstijl.
+- Het formulier is ongewijzigd; FormSubmit-inzendingen werken na activatie. Markeer de afzender als geen spam om nieuwe aanvragen in je inbox te krijgen.
