@@ -65,112 +65,69 @@
     revealNodes.forEach((node) => node.classList.add("is-visible"));
   }
 
+  /* A quiet JOVL-coloured haze follows the normal mouse across the whole site. */
   const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-  if (precisePointer.matches) {
-    const companion = document.createElement("div");
-    companion.className = "cursor-companion";
-    companion.setAttribute("aria-hidden", "true");
-    companion.textContent = "bekijk";
-    document.body.appendChild(companion);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
-    let frame = 0;
+  if (precisePointer.matches && !reducedMotion.matches) {
+    const glow = document.createElement("div");
+    glow.className = "cursor-glow";
+    glow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(glow);
 
-    const renderCursor = () => {
-      currentX += (targetX - currentX) * 0.24;
-      currentY += (targetY - currentY) * 0.24;
-      companion.style.left = `${currentX}px`;
-      companion.style.top = `${currentY}px`;
-      frame = requestAnimationFrame(renderCursor);
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let running = false;
+
+    const render = () => {
+      currentX += (targetX - currentX) * 0.18;
+      currentY += (targetY - currentY) * 0.18;
+      glow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+
+      if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
+        requestAnimationFrame(render);
+      } else {
+        running = false;
+      }
     };
 
-    document.addEventListener("mousemove", (event) => {
-      targetX = event.clientX + 24;
-      targetY = event.clientY + 24;
-    }, { passive: true });
+    document.addEventListener(
+      "pointermove",
+      (event) => {
+        targetX = event.clientX;
+        targetY = event.clientY;
+        glow.classList.add("is-visible");
+        if (!running) {
+          running = true;
+          requestAnimationFrame(render);
+        }
+      },
+      { passive: true }
+    );
 
-    document.querySelectorAll(".logo-tile, .brand, .legacy-hero-visual").forEach((element) => {
-      element.addEventListener("mouseenter", () => {
-        companion.textContent = element.classList.contains("brand")
-          ? "home"
-          : element.classList.contains("legacy-hero-visual")
-            ? "beeld"
-            : "bekijk";
-        companion.classList.add("is-visible");
-        if (!frame) frame = requestAnimationFrame(renderCursor);
-      });
-      element.addEventListener("mouseleave", () => {
-        companion.classList.remove("is-visible");
-      });
-    });
+    document.addEventListener("pointerleave", () => glow.classList.remove("is-visible"));
+    document.addEventListener("pointerenter", () => glow.classList.add("is-visible"));
   }
 
-  const websiteForm = document.querySelector("[data-website-form]");
-  if (websiteForm) {
-    websiteForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
+  /* Keep the form native and reliable; only improve the subject and submit state. */
+  document.querySelectorAll("[data-native-form]").forEach((form) => {
+    form.addEventListener("submit", () => {
+      const company = form.querySelector("[name='Bedrijf']")?.value.trim();
+      const subject = form.querySelector("[name='_subject']");
+      const submitButton = form.querySelector("button[type='submit']");
 
-      const submitButton = websiteForm.querySelector("button[type='submit']");
-      const status = websiteForm.querySelector("[data-form-status]");
-      const endpoint = websiteForm.getAttribute("data-endpoint")?.trim();
-      const formData = new FormData(websiteForm);
-      const originalButtonText = submitButton?.textContent || "Verstuur mijn antwoorden";
-
-      if (!endpoint) {
-        if (status) {
-          status.textContent = "Het formulier is nog niet gekoppeld. Mail je antwoorden naar john@jovl.nl.";
-          status.classList.add("show");
-        }
-        return;
+      if (subject) {
+        subject.value = company
+          ? `Nieuwe website-aanvraag van ${company}`
+          : "Nieuwe website-aanvraag via jovl.nl";
       }
 
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = "Bezig met versturen…";
       }
-      if (status) {
-        status.classList.remove("show");
-        status.textContent = "";
-      }
-
-      try {
-        const response = await fetch(endpoint, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        });
-
-        let result = {};
-        try {
-          result = await response.json();
-        } catch (_) {
-          // Some form services can return an empty success response.
-        }
-
-        if (!response.ok || result.success === false) {
-          throw new Error(result.message || "De vragenlijst kon niet worden verstuurd.");
-        }
-
-        websiteForm.reset();
-        if (status) {
-          status.textContent = "Dank je. Je antwoorden zijn verstuurd. Ik neem contact met je op.";
-          status.classList.add("show");
-        }
-      } catch (error) {
-        if (status) {
-          status.textContent =
-            "Versturen lukt nu niet. Mail je antwoorden rechtstreeks naar john@jovl.nl.";
-          status.classList.add("show");
-        }
-      } finally {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = originalButtonText;
-        }
-      }
     });
-  }
+  });
 })();
