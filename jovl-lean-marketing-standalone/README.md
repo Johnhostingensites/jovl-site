@@ -1,25 +1,37 @@
-# JOVL website-update v2
+# JOVL website-update v3
 
-Deze map bevat twee statische pagina's:
+Deze map bevat de bijgewerkte JOVL-site:
 
-- `index.html` — vernieuwde homepage
-- `website/index.html` — compacte salespagina voor het websiteaanbod
+- `index.html` — homepage
+- `website/index.html` — salespagina voor het websiteaanbod
 - `assets/styles.css` — gedeelde vormgeving
 - `assets/site.js` — mobiel menu, animaties, FAQ, dynamisch jaartal en formulierafhandeling
 
-## Belangrijk
+## Wat is aangepast
 
-- Het originele JOVL-logo staat lokaal in `assets/logo-jovl.png` en wordt op beide pagina's gebruikt.
-- Er zijn geen persoonlijke foto's opgenomen.
-- Het copyright toont minimaal 2026 en loopt vanaf 2027 automatisch mee met het kalenderjaar.
-- Alle interface-iconen staan lokaal in `assets/icons/`. Er is dus geen externe iconendienst die bij publicatie kan wegvallen.
-- De vaste investering op de websitepagina is €1.950 excl. btw; er staat geen introductiekorting meer op de site.
+- Het oude JOVL-favicon is teruggezet als los J-beeldmerk.
+- De homepage gebruikt weer het bekende beeld met **minder / lean / beter**.
+- De typografie gebruikt weer Montserrat, zoals in de eerdere site.
+- Buttons krijgen bij hover weer de donkergroene JOVL-kleur.
+- Klantlogo’s gaan bij hover van grijs naar kleur en linken weer naar de organisaties.
+- Op de salespagina is `Factuur bij livegang` vervangen door `No cure, no pay`.
+- Het formulier verstuurt de ingevulde antwoorden rechtstreeks als overzicht naar `john@jovl.nl`.
 
-## Online vragenlijst koppelen
+## Formulier eenmalig activeren
 
-Het formulier gebruikt `data-endpoint=""`. Zonder endpoint opent na verzenden het e-mailprogramma met de antwoorden.
-Vul bij voorkeur een eigen Formspree-, Basin- of ander formulierendpoint in bij het attribuut `data-endpoint` in `website/index.html`.
+Het formulier is gekoppeld via FormSubmit. Daar is geen account voor nodig.
+
+1. Publiceer deze bestanden.
+2. Open `https://jovl.nl/website/#vragenlijst`.
+3. Verstuur zelf één testinzending.
+4. FormSubmit stuurt een activatiemail naar `john@jovl.nl`.
+5. Klik in die mail op de bevestigingslink.
+6. Verstuur daarna nog een test. Vanaf dat moment komen aanvragen als tabeloverzicht in de inbox binnen.
+
+Controleer eventueel ook de map Ongewenste e-mail bij stap 4.
+
+Het formulier gebruikt een verborgen honeypot tegen eenvoudige spam. Voeg FormSubmit ook toe aan de privacyverklaring als externe formulierverwerker.
 
 ## Publiceren
 
-Plaats de inhoud van deze map in de root van de GitHub-repository. Test eerst via een preview-deployment. De pagina `/website/` gebruikt relatieve assets en werkt vanaf hetzelfde domein.
+Plaats de inhoud van deze map in de root van de GitHub-repository. Bestaande bestanden met dezelfde naam mogen worden vervangen. Verwijder de mappenstructuur niet: `/website/` en `/assets/` moeten intact blijven.

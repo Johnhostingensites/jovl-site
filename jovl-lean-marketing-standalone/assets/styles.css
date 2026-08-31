@@ -29,7 +29,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--cream);
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.58;
   text-rendering: optimizeLegibility;
@@ -129,7 +129,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Montserrat", "Inter", sans-serif;
+  font-family: "Montserrat", system-ui, sans-serif;
   letter-spacing: -0.052em;
   line-height: 1.02;
 }
@@ -203,11 +203,18 @@ h4 {
   transition: transform 180ms ease;
 }
 
-.button:hover,
+.button:hover {
+  color: var(--white);
+  background: #16321e;
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
 .button:focus-visible {
   color: var(--ink);
   background: var(--aqua);
-  box-shadow: 0 12px 28px rgba(17, 220, 182, 0.20);
+  box-shadow: 0 0 0 4px rgba(17, 220, 182, 0.22);
+  outline: none;
   transform: translateY(-2px);
 }
 
@@ -291,6 +298,12 @@ h4 {
 .brand img {
   width: 145px;
   height: auto;
+  transition: transform 200ms ease;
+}
+
+.brand:hover img,
+.brand:focus-visible img {
+  transform: translateY(-2px) scale(1.02);
 }
 
 .main-nav {
@@ -613,8 +626,11 @@ h4 {
   place-items: center;
   padding: 16px;
   border: 1px solid var(--line);
+  color: inherit;
   background: var(--white);
   box-shadow: 0 8px 24px rgba(25, 13, 39, 0.04);
+  text-decoration: none;
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .logo-tile img {
@@ -626,10 +642,18 @@ h4 {
   transition: filter 180ms ease, opacity 180ms ease, transform 180ms ease;
 }
 
-.logo-tile:hover img {
+.logo-tile:hover,
+.logo-tile:focus-visible {
+  box-shadow: 0 14px 32px rgba(25, 13, 39, 0.08);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.logo-tile:hover img,
+.logo-tile:focus-visible img {
   filter: grayscale(0);
   opacity: 1;
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .offer-heading {
@@ -2121,3 +2145,49 @@ h4 {
 /* Local icon files: robust on GitHub/Cloudflare without an icon font. */
 img.icon { object-fit: contain; }
 .story-node__icon img.icon { width: 30px; height: 30px; }
+
+
+/* Restored JOVL homepage visual */
+.legacy-hero-visual {
+  min-height: 510px;
+  display: grid;
+  place-items: center;
+}
+
+.legacy-hero-visual img {
+  width: min(100%, 570px);
+  height: auto;
+  filter: drop-shadow(0 24px 42px rgba(25, 13, 39, 0.08));
+}
+
+.form-honey {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 920px) {
+  .legacy-hero-visual {
+    min-height: 420px;
+  }
+
+  .legacy-hero-visual img {
+    width: min(100%, 520px);
+  }
+}
+
+@media (max-width: 560px) {
+  .legacy-hero-visual {
+    min-height: 340px;
+  }
+
+  .legacy-hero-visual img {
+    width: min(100%, 430px);
+  }
+}

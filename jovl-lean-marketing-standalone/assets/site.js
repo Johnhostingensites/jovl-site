@@ -74,47 +74,46 @@
       const status = websiteForm.querySelector("[data-form-status]");
       const endpoint = websiteForm.getAttribute("data-endpoint")?.trim();
       const formData = new FormData(websiteForm);
+      const originalButtonText = submitButton?.textContent || "Verstuur mijn antwoorden";
 
-      if (submitButton) submitButton.disabled = true;
+      if (!endpoint) {
+        if (status) {
+          status.textContent = "Het formulier is nog niet gekoppeld. Mail je antwoorden naar john@jovl.nl.";
+          status.classList.add("show");
+        }
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Bezig met versturen…";
+      }
       if (status) {
         status.classList.remove("show");
         status.textContent = "";
       }
 
       try {
-        if (endpoint) {
-          const response = await fetch(endpoint, {
-            method: "POST",
-            body: formData,
-            headers: { Accept: "application/json" },
-          });
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        });
 
-          if (!response.ok) {
-            throw new Error("De vragenlijst kon niet worden verstuurd.");
-          }
-
-          websiteForm.reset();
-          if (status) {
-            status.textContent = "Dank je. Je ontvangt snel een reactie.";
-            status.classList.add("show");
-          }
-          return;
+        let result = {};
+        try {
+          result = await response.json();
+        } catch (_) {
+          // Some form services can return an empty success response.
         }
 
-        const lines = [];
-        for (const [key, value] of formData.entries()) {
-          if (!String(value).trim()) continue;
-          lines.push(`${key}: ${value}`);
+        if (!response.ok || result.success === false) {
+          throw new Error(result.message || "De vragenlijst kon niet worden verstuurd.");
         }
 
-        const subject = encodeURIComponent("Online vragenlijst — website laten maken");
-        const body = encodeURIComponent(
-          `Hoi John,\n\nHierbij mijn eerste antwoorden.\n\n${lines.join("\n\n")}\n\nGroet,`
-        );
-        window.location.href = `mailto:john@jovl.nl?subject=${subject}&body=${body}`;
-
+        websiteForm.reset();
         if (status) {
-          status.textContent = "Je e-mailprogramma wordt geopend met je antwoorden.";
+          status.textContent = "Dank je. Je antwoorden zijn verstuurd. Ik neem contact met je op.";
           status.classList.add("show");
         }
       } catch (error) {
@@ -124,7 +123,10 @@
           status.classList.add("show");
         }
       } finally {
-        if (submitButton) submitButton.disabled = false;
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
       }
     });
   }
