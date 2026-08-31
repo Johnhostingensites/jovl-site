@@ -1,3 +1,9 @@
+# JOVL site update v9
+
+Deze versie lost de logo-hover definitief op. Elk logo gebruikt één echte kleurenafbeelding. Die afbeelding wordt standaard met CSS grijs getoond en bij hover/focus in de echte merkkleuren. De homepage en de pagina Website laten maken gebruiken exact dezelfde implementatie.
+
+Belangrijk: upload ook `assets/styles-v9.css` en de map `assets/logos/color-v9`. De nieuwe bestandsnamen voorkomen dat een oude Cloudflare- of browsercache zichtbaar blijft.
+
 # JOVL website-update v5
 
 Deze map bevat de bijgewerkte JOVL-site:
