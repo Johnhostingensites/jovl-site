@@ -65,6 +65,49 @@
     revealNodes.forEach((node) => node.classList.add("is-visible"));
   }
 
+  const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  if (precisePointer.matches) {
+    const companion = document.createElement("div");
+    companion.className = "cursor-companion";
+    companion.setAttribute("aria-hidden", "true");
+    companion.textContent = "bekijk";
+    document.body.appendChild(companion);
+
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let frame = 0;
+
+    const renderCursor = () => {
+      currentX += (targetX - currentX) * 0.24;
+      currentY += (targetY - currentY) * 0.24;
+      companion.style.left = `${currentX}px`;
+      companion.style.top = `${currentY}px`;
+      frame = requestAnimationFrame(renderCursor);
+    };
+
+    document.addEventListener("mousemove", (event) => {
+      targetX = event.clientX + 24;
+      targetY = event.clientY + 24;
+    }, { passive: true });
+
+    document.querySelectorAll(".logo-tile, .brand, .legacy-hero-visual").forEach((element) => {
+      element.addEventListener("mouseenter", () => {
+        companion.textContent = element.classList.contains("brand")
+          ? "home"
+          : element.classList.contains("legacy-hero-visual")
+            ? "beeld"
+            : "bekijk";
+        companion.classList.add("is-visible");
+        if (!frame) frame = requestAnimationFrame(renderCursor);
+      });
+      element.addEventListener("mouseleave", () => {
+        companion.classList.remove("is-visible");
+      });
+    });
+  }
+
   const websiteForm = document.querySelector("[data-website-form]");
   if (websiteForm) {
     websiteForm.addEventListener("submit", async (event) => {
