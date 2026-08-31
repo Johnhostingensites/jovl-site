@@ -1,23 +1,25 @@
-# Jovl Lean Marketing - complete deploy versie
+# JOVL website-update v2
 
-Deze versie bevat:
-- `index.html`
-- lokale `/assets` map
-- lokale favicon
-- lokaal Jovl-logo
-- lokale partnerlogo’s
-- lokale iconen
-- lokale foto van John
-- lokale hero-animatie
+Deze map bevat twee statische pagina's:
 
-De site verwijst voor afbeeldingen niet meer naar Webflow-CDN.
+- `index.html` — vernieuwde homepage
+- `website/index.html` — compacte salespagina voor het websiteaanbod
+- `assets/styles.css` — gedeelde vormgeving
+- `assets/site.js` — mobiel menu, animaties, FAQ, dynamisch jaartal en formulierafhandeling
 
-## Lokaal testen
-Dubbelklik op `index.html`.
+## Belangrijk
 
-## Uploaden
-Upload de volledige map naar Netlify, Cloudflare Pages of een andere statische hosting.
-Belangrijk: upload niet alleen `index.html`, maar ook de map `/assets`.
+- Het originele JOVL-logo staat lokaal in `assets/logo-jovl.png` en wordt op beide pagina's gebruikt.
+- Er zijn geen persoonlijke foto's opgenomen.
+- Het copyright toont minimaal 2026 en loopt vanaf 2027 automatisch mee met het kalenderjaar.
+- Alle interface-iconen staan lokaal in `assets/icons/`. Er is dus geen externe iconendienst die bij publicatie kan wegvallen.
+- De vaste investering op de websitepagina is €1.950 excl. btw; er staat geen introductiekorting meer op de site.
 
-## Let op
-Het lettertype Inter wordt nog via Google Fonts geladen. Wil je later ook dat volledig lokaal maken, dan kan dat nog in een volgende optimalisatieronde.
+## Online vragenlijst koppelen
+
+Het formulier gebruikt `data-endpoint=""`. Zonder endpoint opent na verzenden het e-mailprogramma met de antwoorden.
+Vul bij voorkeur een eigen Formspree-, Basin- of ander formulierendpoint in bij het attribuut `data-endpoint` in `website/index.html`.
+
+## Publiceren
+
+Plaats de inhoud van deze map in de root van de GitHub-repository. Test eerst via een preview-deployment. De pagina `/website/` gebruikt relatieve assets en werkt vanaf hetzelfde domein.
