@@ -1560,6 +1560,26 @@ h4 {
   grid-column: 1 / -1;
 }
 
+.form-guidance {
+  padding: 15px 17px;
+  border-left: 3px solid var(--aqua);
+  background: #f4fbf9;
+}
+
+.form-guidance strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.form-guidance p {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .form-field label {
   font-size: 12px;
   font-weight: 800;

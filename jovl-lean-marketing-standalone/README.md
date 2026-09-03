@@ -45,3 +45,11 @@ Plaats de inhoud van deze map in de root van de GitHub-repository. Laat de mappe
 ## Versie 6
 - Het blok “Praktisch toegepast” is één-op-één teruggebracht naar de oorspronkelijke kop, tekst, 4×2-logo-indeling en hoverstijl.
 - Het formulier is ongewijzigd; FormSubmit-inzendingen werken na activatie. Markeer de afzender als geen spam om nieuwe aanvragen in je inbox te krijgen.
+
+
+## Versie 10
+
+- CTA's op de pagina Website laten maken heten nu `Dit wil ik` en linken naar het formulier.
+- De homepage is ongewijzigd.
+- De vraag over extra functionaliteit is verwijderd.
+- De twee inhoudelijke vragen zijn optioneel en hebben extra uitleg en voorbeelden gekregen.
